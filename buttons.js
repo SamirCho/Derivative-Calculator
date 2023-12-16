@@ -1,6 +1,6 @@
 let buttonNames=["no function","sqrt","reciprocal","^n","sin","cos","tan","csc","sec","cot","exp","ln","b^","log_b"]
 let buttonArray=[]
-let b=2
+let b=document.getElementById("base").value
 let n=2
 let y,dy
 
@@ -144,25 +144,27 @@ function lnFXN(){
 function bFXN(){
     y=fxn.value
     dy=derivative(fxn.value)
-    b=parseFloat(prompt("Value of base?"))
-    if(isNaN(b)){
-        b=2
-    }
+    b=document.getElementById("base").value
     document.getElementById("operator").innerHTML=b+"^["
     document.getElementById("bracket").innerHTML="]]"
     document.getElementById("power").innerHTML=""
-    document.getElementById("container").innerHTML=cleanUp("("+dy+")("+b+"^("+y+"))(ln("+b+"))")
+    if(b==1){
+        document.getElementById("container").innerHTML=0
+    }else{
+        document.getElementById("container").innerHTML=cleanUp("("+dy+")("+b+"^("+y+"))(ln("+b+"))")
+    }
 }
 
 function logbFXN(){
     y=fxn.value
     dy=derivative(fxn.value)
-    b=parseFloat(prompt("Value of base?"))
-    if(isNaN(b)){
-        b=2
-    }
+    b=document.getElementById("base").value
     document.getElementById("operator").innerHTML="log_"+b+"["
     document.getElementById("bracket").innerHTML="]]"
     document.getElementById("power").innerHTML=""
-    document.getElementById("container").innerHTML=cleanUp(`(${dy})/[(${y})(ln(${b})]`)
+    if(b==1){
+        document.getElementById("container").innerHTML="☹️"
+    }else{
+        document.getElementById("container").innerHTML=cleanUp(`(${dy})/[(${y})(ln(${b})]`)
+    }
 }

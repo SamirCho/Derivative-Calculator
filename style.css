@@ -31,3 +31,7 @@ span{
 h2{
     font-size: large;
 }
+#base{
+    height:20px;
+    width:40px;
+}
