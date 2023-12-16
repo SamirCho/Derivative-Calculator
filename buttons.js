@@ -1,6 +1,7 @@
 let buttonNames=["no function","sqrt","reciprocal","^n","sin","cos","tan","csc","sec","cot","exp","ln","b^","log_b"]
 let buttonArray=[]
 let b=2
+let n=2
 let y,dy
 
 class button{

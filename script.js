@@ -26,12 +26,16 @@ function derivative(input){
 }
 
 function breakup(input){
+    input=removeSpaces(input)
     let array=[]
     let a=0
     let c
     input=input.split("")
     for (let i = 0; i < input.length; i++) {
-        if(input[i]=="+"){
+        if(input[i]=="^"&&input[i+1]=="-"){
+            array[a]+=input[i]+input[i+1]
+            i++
+        }else if(input[i]=="+"){
             a++
         }
         else if(input[i]=="-"){
@@ -51,13 +55,23 @@ function breakup(input){
     for (let i = 0; i < array.length; i++) {
         array[i]=removeSpaces(array[i])
     }
-    console.log(array)
+    for (let i = 0; i < array.length; i++) {
+        array[i]=coef(array[i])
+    }
     return array
 }
 
 function removeSpaces(input){
     input=input.split(" ")
     return input.join("")
+}
+
+function coef(input){
+    input=input.split("x")
+    if(input[0]=="-"){
+        input[0]="-1"
+    }
+    return input.join("x")
 }
 
 function evaluate(input){
@@ -83,6 +97,7 @@ function evaluate(input){
 }
 
 function powerRule(input){
+    input=input.toString()
     input=input.split("x^")
     if(input[0]==""){
         input[0]=1
@@ -119,7 +134,7 @@ function cleanUp(input){
         if(input[i]=="+"){
             input[i]=" + "
         }
-        if(input[i]=="-"){
+        if(input[i]=="-"&&input[i-1]!="^"){
             input[i]=" - "
         }
         if(input[i]=="x"&&input[i+1]=="^"&&input[i+2]=="0"){
