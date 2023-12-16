@@ -10,7 +10,8 @@ function derivative(input){
         input=="x"
         return 1
     }
-    if(input=="-x"){
+    if(input=="-x"||input=="x^1"){
+        input="-x"
         return -1
     }
     if(!isNaN(input)){
@@ -47,7 +48,16 @@ function breakup(input){
         c=array[i].split("d")
         array[i]=c[2]
     }
+    for (let i = 0; i < array.length; i++) {
+        array[i]=removeSpaces(array[i])
+    }
+    console.log(array)
     return array
+}
+
+function removeSpaces(input){
+    input=input.split(" ")
+    return input.join("")
 }
 
 function evaluate(input){
@@ -83,6 +93,7 @@ function powerRule(input){
 }
 
 function cleanUp(input){
+    input=input.toString()
     input=input.split("+")
     for (let i = 0; i < input.length; i++) {
         if(input[i]==0){
@@ -115,6 +126,12 @@ function cleanUp(input){
             input[i]="("
             input[i+1]="1"
             input[i+2]=")"
+        }
+        if(input[i]=="("&&input[i+1]=="0"&&input[i+2]==")"){
+            return 0
+        }
+        if(input[i]=="("&&input[i+1]=="1"&&input[i+2]==")"&&input[i+3]!="/"){
+            input.splice(i,3)
         }
     }
     return input.join("")
