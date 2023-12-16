@@ -1,5 +1,5 @@
 let fxn=document.getElementById("fxn")
-let container=document.getElementById("container")
+let buttons=["sqrt","sin","cos","tan","ln","exp"]
 
 document.addEventListener('keypress', function (e) {
     if (e.key=="Enter") {
@@ -9,13 +9,13 @@ document.addEventListener('keypress', function (e) {
 
 function derivative(input){
     if(!isNaN(input)){
-        container.innerHTML=0
+        document.getElementById("container").innerHTML=0
     }else{
         input=breakup(input)
         for (let i = 0; i < input.length; i++) {
             input[i]=evaluate(input[i])        
         }
-        container.innerHTML=eval(cleanUp(input.join("+")))
+        document.getElementById("container").innerHTML=cleanUp(input.join("+"))
     }
 }
 
@@ -29,8 +29,19 @@ function evaluate(input){
     if(!isNaN(input)){
         return 0
     }
-    input=input.split("x")
-    return input[0]
+    if(input.split("^").length==1){
+        input=input.split("x")
+        return input[0]
+    }else{
+        return powerRule(input)
+    }
+}
+
+function powerRule(input){
+    input=input.split("x^")
+    input[0]*=input[1]
+    input[1]-=1
+    return input.join("x^")
 }
 
 function cleanUp(input){
@@ -40,7 +51,14 @@ function cleanUp(input){
             input.splice(i,1)        
         }
     }
-    return input.join("+")
+    input=input.join("+")
+    input=input.split("")
+    for (let i = 0; i < input.length; i++) {
+        if(input[i]=="^"&&input[i+1]=="1"){
+            input.splice(i,2)
+        }
+    }
+    return input.join("")
 }
 
 function breakup(input){
@@ -66,7 +84,6 @@ function breakup(input){
         b=array[i].split("d")
         array[i]=b[2]
     }
+    console.log(array)
     return array
 }
-
-breakup("-x-5+2x-99-22x")
