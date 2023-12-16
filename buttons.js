@@ -4,7 +4,7 @@ let b=2
 let n=2
 let y,dy
 
-class button{
+class Button{
     constructor(name){
         this.newButton=document.createElement("button")
         this.newButton.innerHTML=name
@@ -15,7 +15,7 @@ class button{
 }
 
 for (let i = 0; i < buttonNames.length; i++) {
-    buttonArray[i]=new button(buttonNames[i])
+    buttonArray[i]=new Button(buttonNames[i])
     buttonArray[i].draw()
 }
 
@@ -134,7 +134,7 @@ function lnFXN(){
     document.getElementById("operator").innerHTML="ln["
     document.getElementById("bracket").innerHTML="]]"
     document.getElementById("power").innerHTML=""
-    if(!isNaN(dy)){
+    if(!isNaN(dy)&&dy!=0){
         document.getElementById("container").innerHTML="1/x"
     }else{
         document.getElementById("container").innerHTML=cleanUp("("+dy+")/("+y+")")

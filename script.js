@@ -1,6 +1,9 @@
 let fxn=document.getElementById("fxn")
 
 function derivative(input){
+    if(input==0){
+        return 0
+    }
     if(input=="x^0"){
         input="1"
         return 0
@@ -104,10 +107,15 @@ function powerRule(input){
     }
     input[0]*=input[1]
     input[1]-=1
+    input[0]=input[0].toFixed(0)
+    input[1]=input[1].toFixed(0)
     return input.join("x^")
 }
 
 function cleanUp(input){
+    if(input==0){
+        return 0
+    }
     input=input.toString()
     input=input.split("+")
     for (let i = 0; i < input.length; i++) {
@@ -118,7 +126,7 @@ function cleanUp(input){
     input=input.join("+")
     input=input.split("")
     for (let i = 0; i < input.length; i++) {
-        if(input[i]=="^"&&input[i+1]=="1"){
+        if(input[i]=="^"&&input[i+1]=="1"&&input[i+2]!="."){
             input.splice(i,2)
         }
         if(input[i]=="1x"){
