@@ -41,6 +41,27 @@ function noFXN(){
     document.getElementById("container").innerHTML=dy
 }
 
+function sqrtFXN(){
+    y=fxn.value
+    dy=derivative(fxn.value)
+    document.getElementById("operator").innerHTML="sqrt["
+    document.getElementById("bracket").innerHTML="]]"
+    document.getElementById("container").innerHTML="("+dy+")/"+"[2sqrt("+y+")]"
+}
+
+function reciprocalFXN(){
+    y=fxn.value
+    dy=derivative(fxn.value)
+    document.getElementById("operator").innerHTML="["
+    document.getElementById("power").innerHTML="^(-1)]"
+    document.getElementById("bracket").innerHTML="]"
+    document.getElementById("container").innerHTML="-("+dy+")/"+"[("+y+")^2]"
+}
+
+function nFXN(){
+    console.log(9)
+}
+
 function sinFXN(){
     y=fxn.value
     dy=derivative(fxn.value)
