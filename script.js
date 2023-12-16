@@ -1,8 +1,13 @@
 let fxn=document.getElementById("fxn")
-let y,dy
 
 function derivative(input){
-    if(input=="x"){
+    if(input=="x^0"){
+        input="1"
+        return 0
+    }
+    input=cleanUp(input)
+    if(input=="x"||input=="x^1"){
+        input=="x"
         return 1
     }
     if(input=="-x"){
@@ -42,7 +47,6 @@ function breakup(input){
         c=array[i].split("d")
         array[i]=c[2]
     }
-    console.log(array)
     return array
 }
 
@@ -58,7 +62,6 @@ function evaluate(input){
     }
     if(input.split("^").length==1){
         input=input.split("x")
-        console.log(input)
         if(input[1]==""||input[1]==" "){
             return input[0]
         }else if(input[0]==""||input[0]==" "){
@@ -107,6 +110,11 @@ function cleanUp(input){
         }
         if(input[i]=="-"){
             input[i]=" - "
+        }
+        if(input[i]=="x"&&input[i+1]=="^"&&input[i+2]=="0"){
+            input[i]="("
+            input[i+1]="1"
+            input[i+2]=")"
         }
     }
     return input.join("")

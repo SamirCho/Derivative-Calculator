@@ -1,11 +1,11 @@
 body{
     background-color: aquamarine;
     font-family:"Trebuchet MS", sans-serif;
-    max-width: 500px;
+    max-width: 1000px;
     margin: auto;
 }
 div{
-    font-size: 50px;
+    font-size: 40px;
 }
 button:hover{
     filter: drop-shadow(0 0 2em #646cffaa);
@@ -21,12 +21,10 @@ button{
     font-size: 16px;
     margin-left: 1%;
 }
-#bar{
-    background-color: black;
-}
 input{
     font-size:30px;
+    width:100px;
 }
 span{
-    font-size:30px
+    font-size:40px
 }
