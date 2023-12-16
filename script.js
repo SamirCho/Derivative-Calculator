@@ -1,37 +1,49 @@
 let fxn=document.getElementById("fxn")
-let buttons=["sqrt","sin","cos","tan","exp","ln"]
-
-for (let i = 0; i < buttons.length; i++) {
-    let newButton=document.createElement("button")
-    newButton.innerHTML=buttons[i]
-    document.getElementById("buttonContainer").appendChild(newButton)
-}
-
-document.addEventListener('keypress', function (e) {
-    if (e.key=="Enter") {
-        derivative(fxn.value)
-    }
-  })
+let y,dy
 
 function derivative(input){
     if(input=="x"){
-        document.getElementById("container").innerHTML=1
         return 1
     }
     if(input=="-x"){
-        document.getElementById("container").innerHTML=-1
         return -1
     }
     if(!isNaN(input)){
-        document.getElementById("container").innerHTML=0
+        return 0
     }else{
         input=breakup(input)
         for (let i = 0; i < input.length; i++) {
             input[i]=evaluate(input[i])        
         }
-        document.getElementById("container").innerHTML=cleanUp(input.join("+"))
         return document.getElementById("container").innerHTML=cleanUp(input.join("+"))
     }
+}
+
+function breakup(input){
+    let array=[]
+    let a=0
+    let c
+    input=input.split("")
+    for (let i = 0; i < input.length; i++) {
+        if(input[i]=="+"){
+            a++
+        }
+        else if(input[i]=="-"){
+            a++
+            array[a]+=input[i]
+        }else{
+            array[a]+=input[i]
+        }
+    }
+    array=array.filter(function(element){
+        return element!==" ";
+    })
+    for (let i = 0; i < array.length; i++) {
+        c=array[i].split("d")
+        array[i]=c[2]
+    }
+    console.log(array)
+    return array
 }
 
 function evaluate(input){
@@ -46,7 +58,12 @@ function evaluate(input){
     }
     if(input.split("^").length==1){
         input=input.split("x")
-        return input[0]
+        console.log(input)
+        if(input[1]==""||input[1]==" "){
+            return input[0]
+        }else if(input[0]==""||input[0]==" "){
+            return input[1]
+        }
     }else{
         return powerRule(input)
     }
@@ -54,7 +71,7 @@ function evaluate(input){
 
 function powerRule(input){
     input=input.split("x^")
-    if(input[0]==''){
+    if(input[0]==""){
         input[0]=1
     }
     input[0]*=input[1]
@@ -93,31 +110,4 @@ function cleanUp(input){
         }
     }
     return input.join("")
-}
-
-function breakup(input){
-    let array=[]
-    let a=0
-    let b
-    input=input.split("")
-    for (let i = 0; i < input.length; i++) {
-        if(input[i]=="+"){
-            a++
-        }
-        else if(input[i]=="-"){
-            a++
-            array[a]+=input[i]
-        }else{
-            array[a]+=input[i]
-        }
-    }
-    array=array.filter(function (element) {
-        return element !== " ";
-    })
-    for (let i = 0; i < array.length; i++) {
-        b=array[i].split("d")
-        array[i]=b[2]
-    }
-    console.log(array)
-    return array
 }

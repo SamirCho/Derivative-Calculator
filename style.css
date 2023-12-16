@@ -11,7 +11,7 @@ button:hover{
     filter: drop-shadow(0 0 2em #646cffaa);
 }
 button{
-    background-color: #04AA6D; /* Green */
+    background-color: #04AA6D;
     border: none;
     color: white;
     padding: 15px 32px;
@@ -25,5 +25,8 @@ button{
     background-color: black;
 }
 input{
-    font-size: 30px;
+    font-size:30px;
+}
+span{
+    font-size:30px
 }
