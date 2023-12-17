@@ -200,9 +200,7 @@ function cleanUp(input){
             input.splice(i,3)
         }
         if(input[i]=="("&&!isNaN(input[i+1])&&input[i+2]==")"){
-            if(input[i+1]!=1){
-                input[i]=input[i+1]
-            }
+            input[i]=input[i+1]
             input.splice(i+1,2)
         }
         if(input[i]=="("&&input[i+1]=="x"&&input[i+2]==")"&&input[i+3]=="/"){
@@ -219,8 +217,11 @@ function cleanUp(input){
         if(input[i]=="-1"){
             input[i]="-"
         }
-        if(input[i]==" - "&&isNaN(input[i+1]&&input[i+1]!="x")){
+        if(input[i]==" - "&&isNaN(input[i+1])&&input[i+1]!="x"){
             input[i]="-"
+        }
+        if(input[i]=="-"&&input[i+1]=="/"){
+            input[i]="-1"
         }
     }
     return input.join("")
