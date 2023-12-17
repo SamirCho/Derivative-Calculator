@@ -54,9 +54,7 @@ function breakup(input){
             array[a]+=input[i]
         }
     }
-    array=array.filter(function(element){
-        return element!==" "
-    })
+    array=array.filter(deleteEmptyItems)
     for (let i = 0; i < array.length; i++) {
         c=array[i].split("d")
         array[i]=c[2]
@@ -68,6 +66,10 @@ function breakup(input){
         array[i]=coef(array[i])
     }
     return array
+}
+
+function deleteEmptyItems(input){
+    return input!=" "
 }
 
 function decEval(input){
