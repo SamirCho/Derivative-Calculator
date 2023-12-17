@@ -1,7 +1,7 @@
-let buttonNames=["no function","sqrt","cbrt","reciprocal","abs","^n","sin","cos","tan","csc","sec","cot","sinh","cosh","tanh","csch","sech","coth","exp","ln","b^","log_b"]
-let buttonArray=[]
 let b=document.getElementById("base").value
 let n=document.getElementById("npower").value
+let buttonNames=["no function","sqrt","cbrt","reciprocal","abs","^n","sin","cos","tan","csc","sec","cot","sinh","cosh","tanh","csch","sech","coth","exp","ln","b^","log_b"]
+let buttonArray=[]
 let y,dy
 
 class Button{

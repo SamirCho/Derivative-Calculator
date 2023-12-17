@@ -1,6 +1,6 @@
 let fxn=document.getElementById("fxn")
-let decValue
 let decArray=[]
+let decValue
 
 function derivative(input){
     if(input==0){
