@@ -107,8 +107,8 @@ function powerRule(input){
     }
     input[0]*=input[1]
     input[1]-=1
-    input[0]=input[0].toFixed(5)
-    input[1]=input[1].toFixed(5)
+    input[0]=input[0].toFixed(document.getElementById("dec").value)
+    input[1]=input[1].toFixed(document.getElementById("dec").value)
     return input.join("x^")
 }
 

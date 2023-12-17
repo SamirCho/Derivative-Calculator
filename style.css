@@ -31,7 +31,7 @@ span{
 h2{
     font-size: large;
 }
-#base{
-    height:20px;
+.field{
+    height:30px;
     width:40px;
 }
