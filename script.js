@@ -26,11 +26,10 @@ function derivative(input){
         for (let i = 0; i < input.length; i++) {
             decArray[i]=decEval(input[i])
         }
-        decValue=Math.max(...decArray)
         for (let i = 0; i < input.length; i++) {
             input[i]=evaluate(input[i])
         }
-        return document.getElementById("container").innerHTML=cleanUp(input.join("+"))
+        return cleanUp(input.join("+"))
     }
 }
 
@@ -73,6 +72,7 @@ function deleteEmptyItems(input){
 }
 
 function decEval(input){
+    input=input.toString()
     input=input.split("x^")
     for (let i = 0; i < input.length; i++) {
         input[i]=decEvalPartTwoElectricBoogaloo(input[i])
@@ -125,23 +125,24 @@ function evaluate(input){
 }
 
 function powerRule(input){
-    input=input.toString()
     input=input.split("x^")
     if(input[0]==""){
         input[0]=1
     }
     input[0]*=input[1]
     input[1]-=1
+    decArray.push(decEval(input[0]),decEval(input[1]))
+    decValue=Math.max(...decArray)
     input[0]=input[0].toFixed(decValue)
     input[1]=input[1].toFixed(decValue)
     return input.join("x^")
 }
 
 function cleanUp(input){
+    input=input.toString()
     if(input==0){
         return 0
     }
-    input=input.toString()
     input=input.split("+")
     for (let i = 0; i < input.length; i++) {
         if(input[i]==0){
@@ -195,10 +196,10 @@ function cleanUp(input){
             input[i+1]="1"
             input[i+2]=")"
         }
-        if(input[i]=="("&&input[i+1]==0&&input[i+2]==")"){
+        if(input[i]=="("&&input[i+1]=="0"&&input[i+2]==")"){
             return 0
         }
-        if(input[i]=="("&&input[i+1]==1&&input[i+2]==")"&&input[i+3]!="/"){
+        if(input[i]=="("&&input[i+1]=="1"&&input[i+2]==")"&&input[i+3]!="/"){
             input.splice(i,3)
         }
         if(input[i]=="("&&!isNaN(input[i+1])&&input[i+2]==")"){
@@ -213,7 +214,7 @@ function cleanUp(input){
             input[i]="-"+input[i+2]
             input.splice(i+1,2)
         }
-        if(input[i]=="-"&&input[i+1]==1){
+        if(input[i]=="-"&&input[i+1]=="1"&&isNaN(input[i+2])){
             input.splice(i+1,1)
         }
         if(input[i]=="-1"){
@@ -225,6 +226,24 @@ function cleanUp(input){
         if(input[i]=="-"&&input[i+1]=="/"){
             input[i]="-1"
         }
+        if(input[i]=="-"&&input[i+1]=="0"){
+            return 0
+        }
+        if(input[i]=="-0"){
+            return 0
+        }
+        if(input[i]=="("&&input[i+1]=="x"&&input[i+2]==")"&&input[i+3]=="^"&&!isNaN(input[i+4])){
+            input[i]="x^"+input[i+4]
+            input.splice(i+1,4)
+        }
+        if(input[i]=="^"&&input[i+1]=="("&&input[i+2]=="x"&&input[i+3]==")"){
+            input[i]="^x"
+            input.splice(i+1,3)
+        }
+    }
+    if(input[0]==" "&&input[1]==" - "&&input[2]==" "){
+        input[0]="-"
+        input.splice(1,2)
     }
     return input.join("")
 }

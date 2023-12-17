@@ -75,7 +75,11 @@ function reciprocalFXN(){
     document.getElementById("operator").innerHTML="["
     document.getElementById("bracket").innerHTML="]"
     document.getElementById("power").innerHTML="^(-1)]"
-    document.getElementById("container").innerHTML=cleanUp("-("+dy+")/"+"[("+y+")^2]")
+    if(!isNaN(y)){
+        document.getElementById("container").innerHTML=0
+    }else{
+        document.getElementById("container").innerHTML=cleanUp("-("+dy+")/"+"[("+y+")^2]")
+    }
 }
 
 function absFXN(){
@@ -128,7 +132,7 @@ function tanFXN(){
     document.getElementById("operator").innerHTML="tan["
     document.getElementById("bracket").innerHTML="]]"
     document.getElementById("power").innerHTML=""
-    document.getElementById("container").innerHTML=cleanUp("("+dy+")"+"sec^2("+y+")")
+    document.getElementById("container").innerHTML=cleanUp("("+dy+")"+"[sec("+y+")]^2")
 }
 
 function cscFXN(){
@@ -155,7 +159,7 @@ function cotFXN(){
     document.getElementById("operator").innerHTML="cot["
     document.getElementById("bracket").innerHTML="]]"
     document.getElementById("power").innerHTML=""
-    document.getElementById("container").innerHTML=cleanUp("-("+dy+")csc^2("+y+")")
+    document.getElementById("container").innerHTML=cleanUp("-("+dy+")[csc("+y+")]^2")
 }
 
 function sinhFXN(){
@@ -182,7 +186,7 @@ function tanhFXN(){
     document.getElementById("operator").innerHTML="tanh["
     document.getElementById("bracket").innerHTML="]]"
     document.getElementById("power").innerHTML=""
-    document.getElementById("container").innerHTML=cleanUp("("+dy+")"+"sech^2("+y+")")
+    document.getElementById("container").innerHTML=cleanUp("("+dy+")"+"[sech("+y+")]^2")
 }
 
 function cschFXN(){
@@ -209,7 +213,7 @@ function cothFXN(){
     document.getElementById("operator").innerHTML="coth["
     document.getElementById("bracket").innerHTML="]]"
     document.getElementById("power").innerHTML=""
-    document.getElementById("container").innerHTML=cleanUp("-("+dy+")csch^2("+y+")")
+    document.getElementById("container").innerHTML=cleanUp("-("+dy+")[csch("+y+")]^2")
 }
 
 function expFXN(){
