@@ -1,4 +1,6 @@
 let fxn=document.getElementById("fxn")
+let decValue
+let decArray=[]
 
 function derivative(input){
     if(input==0){
@@ -13,7 +15,7 @@ function derivative(input){
         input=="x"
         return 1
     }
-    if(input=="-x"||input=="x^1"){
+    if(input=="-x"||input=="-x^1"){
         input="-x"
         return -1
     }
@@ -22,7 +24,11 @@ function derivative(input){
     }else{
         input=breakup(input)
         for (let i = 0; i < input.length; i++) {
-            input[i]=evaluate(input[i])        
+            decArray[i]=decEval(input[i])
+        }
+        decValue=Math.max(...decArray)
+        for (let i = 0; i < input.length; i++) {
+            input[i]=evaluate(input[i])
         }
         return document.getElementById("container").innerHTML=cleanUp(input.join("+"))
     }
@@ -49,7 +55,7 @@ function breakup(input){
         }
     }
     array=array.filter(function(element){
-        return element!==" ";
+        return element!==" "
     })
     for (let i = 0; i < array.length; i++) {
         c=array[i].split("d")
@@ -62,6 +68,23 @@ function breakup(input){
         array[i]=coef(array[i])
     }
     return array
+}
+
+function decEval(input){
+    input=input.split("x^")
+    for (let i = 0; i < input.length; i++) {
+        input[i]=decEvalPartTwoElectricBoogaloo(input[i])
+    }
+    return Math.max(...input)
+}
+
+function decEvalPartTwoElectricBoogaloo(input){
+    input=input.split(".")
+    if(input.length==2){
+        return input[1].length
+    }else{
+        return 0
+    }
 }
 
 function removeSpaces(input){
@@ -107,8 +130,8 @@ function powerRule(input){
     }
     input[0]*=input[1]
     input[1]-=1
-    input[0]=input[0].toFixed(document.getElementById("dec").value)
-    input[1]=input[1].toFixed(document.getElementById("dec").value)
+    input[0]=input[0].toFixed(decValue)
+    input[1]=input[1].toFixed(decValue)
     return input.join("x^")
 }
 
@@ -125,15 +148,36 @@ function cleanUp(input){
     }
     input=input.join("+")
     input=input.split("")
-    for (let i = 0; i < input.length; i++) {
-        if(input[i]=="^"&&input[i+1]=="1"&&input[i+2]!="."){
+    console.log(input)
+    for (let j = 0; j < input.length; j+=0.5) {
+        let i=Math.floor(j)
+        if(input[i]=="-"&&input[i+1]=="("&&!isNaN(input[i+2])&&input[i+3]==")"&&input[i+4]=="/"){
+            input[i]="-"+input[i+2]
+            input.splice(i+1,3)
+        }
+        if(input[i]=="-"&&input[i+1]==" "&&isNaN(input[i+2])){
+            input.splice(i+1,1)
+        }
+        if(input[i]=="-"&&input[i+1]=="("&&!isNaN(input[i+2])&&input[i+3]==")"&&isNaN(input[i+4])){
+            input[i]="-"+input[i+2]
+            input.splice(i+1,3)
+        }
+        if(input[i]=="["&&input[i+1]=="("&&input[i+2]=="x"&&input[i+3]==")"&&input[i+4]=="]"){
+            input[i]=input[i+2]
+            input.splice(i+1,4)
+        }
+        if(input[i]=="["&&input[i+1]=="("&&input[i+2]=="x"&&input[i+3]==")"&&input[i+4]=="^"&&input[i+5]==1&&input[i+6]=="]"){
+            input[i]=input[i+2]
+            input.splice(i+1,6)
+        }
+        if(input[i]=="^"&&input[i+1]=="1"&&input[i+2]!="."&&isNaN(input[i+2])){
             input.splice(i,2)
         }
         if(input[i]=="1x"){
-            input[i]=="x"
+            input[i]="x"
         }
         if(input[i]=="-1x"){
-            input[i]=="-x"
+            input[i]="-x"
         }
         if(input[i]=="+"&&input[i+1]=="-"){
             input[i]=" - "
@@ -150,12 +194,36 @@ function cleanUp(input){
             input[i+1]="1"
             input[i+2]=")"
         }
-        if(input[i]=="("&&input[i+1]=="0"&&input[i+2]==")"){
+        if(input[i]=="("&&input[i+1]==0&&input[i+2]==")"){
             return 0
         }
-        if(input[i]=="("&&input[i+1]=="1"&&input[i+2]==")"&&input[i+3]!="/"){
+        if(input[i]=="("&&input[i+1]==1&&input[i+2]==")"&&input[i+3]!="/"){
             input.splice(i,3)
         }
+        if(input[i]=="("&&!isNaN(input[i+1])&&input[i+2]==")"){
+            if(input[i+1]!=1){
+                input[i]=input[i+1]
+            }
+            input.splice(i+1,2)
+        }
+        if(input[i]=="("&&input[i+1]=="x"&&input[i+2]==")"&&input[i+3]=="/"){
+            input[i]=input[i+1]
+            input.splice(i+1,2)
+        }
+        if(input[i]=="-"&&input[i+1]==" "&&!isNaN(input[i+2])&&input[i+3]=="/"){
+            input[i]="-"+input[i+2]
+            input.splice(i+1,2)
+        }
+        if(input[i]=="-"&&input[i+1]==1){
+            input.splice(i+1,1)
+        }
+        if(input[i]=="-1"){
+            input[i]="-"
+        }
+        if(input[i]==" - "&&isNaN(input[i+1]&&input[i+1]!="x")){
+            input[i]="-"
+        }
     }
+    console.log(input)
     return input.join("")
 }

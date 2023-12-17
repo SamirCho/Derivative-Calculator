@@ -1,7 +1,7 @@
-let buttonNames=["no function","sqrt","reciprocal","^n","sin","cos","tan","csc","sec","cot","exp","ln","b^","log_b"]
+let buttonNames=["no function","sqrt","cbrt","reciprocal","abs","^n","sin","cos","tan","csc","sec","cot","sinh","cosh","tanh","csch","sech","coth","exp","ln","b^","log_b"]
 let buttonArray=[]
 let b=document.getElementById("base").value
-let n=2
+let n=document.getElementById("npower").value
 let y,dy
 
 class Button{
@@ -21,18 +21,26 @@ for (let i = 0; i < buttonNames.length; i++) {
 
 buttonArray[0].newButton.addEventListener('click',noFXN)
 buttonArray[1].newButton.addEventListener('click',sqrtFXN)
-buttonArray[2].newButton.addEventListener('click',reciprocalFXN)
-buttonArray[3].newButton.addEventListener('click',nFXN)
-buttonArray[4].newButton.addEventListener("click",sinFXN)
-buttonArray[5].newButton.addEventListener("click",cosFXN)
-buttonArray[6].newButton.addEventListener("click",tanFXN)
-buttonArray[7].newButton.addEventListener("click",cscFXN)
-buttonArray[8].newButton.addEventListener("click",secFXN)
-buttonArray[9].newButton.addEventListener("click",cotFXN)
-buttonArray[10].newButton.addEventListener("click",expFXN)
-buttonArray[11].newButton.addEventListener("click",lnFXN)
-buttonArray[12].newButton.addEventListener("click",bFXN)
-buttonArray[13].newButton.addEventListener("click",logbFXN)
+buttonArray[2].newButton.addEventListener('click',cbrtFXN)
+buttonArray[3].newButton.addEventListener('click',reciprocalFXN)
+buttonArray[4].newButton.addEventListener("click",absFXN)
+buttonArray[5].newButton.addEventListener('click',nFXN)
+buttonArray[6].newButton.addEventListener("click",sinFXN)
+buttonArray[7].newButton.addEventListener("click",cosFXN)
+buttonArray[8].newButton.addEventListener("click",tanFXN)
+buttonArray[9].newButton.addEventListener("click",cscFXN)
+buttonArray[10].newButton.addEventListener("click",secFXN)
+buttonArray[11].newButton.addEventListener("click",cotFXN)
+buttonArray[12].newButton.addEventListener("click",sinhFXN)
+buttonArray[13].newButton.addEventListener("click",coshFXN)
+buttonArray[14].newButton.addEventListener("click",tanhFXN)
+buttonArray[15].newButton.addEventListener("click",cschFXN)
+buttonArray[16].newButton.addEventListener("click",sechFXN)
+buttonArray[17].newButton.addEventListener("click",cothFXN)
+buttonArray[18].newButton.addEventListener("click",expFXN)
+buttonArray[19].newButton.addEventListener("click",lnFXN)
+buttonArray[20].newButton.addEventListener("click",bFXN)
+buttonArray[21].newButton.addEventListener("click",logbFXN)
 
 function noFXN(){
     y=fxn.value
@@ -52,6 +60,15 @@ function sqrtFXN(){
     document.getElementById("container").innerHTML=cleanUp("("+dy+")/"+"[2sqrt("+y+")]")
 }
 
+function cbrtFXN(){
+    y=fxn.value
+    dy=derivative(fxn.value)
+    document.getElementById("operator").innerHTML="cbrt["
+    document.getElementById("bracket").innerHTML="]]"
+    document.getElementById("power").innerHTML=""
+    document.getElementById("container").innerHTML=cleanUp("("+dy+")/"+"[3(cbrt("+y+"))^(2)]")
+}
+
 function reciprocalFXN(){
     y=fxn.value
     dy=derivative(fxn.value)
@@ -61,8 +78,30 @@ function reciprocalFXN(){
     document.getElementById("container").innerHTML=cleanUp("-("+dy+")/"+"[("+y+")^2]")
 }
 
+function absFXN(){
+    y=fxn.value
+    dy=derivative(fxn.value)
+    document.getElementById("operator").innerHTML="abs["
+    document.getElementById("bracket").innerHTML="]]"
+    document.getElementById("power").innerHTML=""
+    document.getElementById("container").innerHTML=cleanUp("[("+dy+")abs("+y+")]/("+y+")")
+}
+
 function nFXN(){
-    console.log(9)
+    y=fxn.value
+    dy=derivative(fxn.value)
+    n=document.getElementById("npower").value
+    document.getElementById("operator").innerHTML="["
+    document.getElementById("bracket").innerHTML="]"
+    document.getElementById("power").innerHTML="^("+n+")]"
+    n=document.getElementById("npower").value
+    if(n==0){
+        document.getElementById("container").innerHTML=0
+    }else if(n==1){
+        document.getElementById("container").innerHTML=cleanUp(dy)
+    }else {
+        document.getElementById("container").innerHTML=cleanUp("("+n+")"+"[("+y+")^"+(parseFloat(n)-1)+"]("+dy+")")
+    }
 }
 
 function sinFXN(){
@@ -119,6 +158,60 @@ function cotFXN(){
     document.getElementById("container").innerHTML=cleanUp("-("+dy+")csc^2("+y+")")
 }
 
+function sinhFXN(){
+    y=fxn.value
+    dy=derivative(fxn.value)
+    document.getElementById("operator").innerHTML="sinh["
+    document.getElementById("bracket").innerHTML="]]"
+    document.getElementById("power").innerHTML=""
+    document.getElementById("container").innerHTML=cleanUp("("+dy+")"+"cosh("+y+")")
+}
+
+function coshFXN(){
+    y=fxn.value
+    dy=derivative(fxn.value)
+    document.getElementById("operator").innerHTML="cosh["
+    document.getElementById("bracket").innerHTML="]]"
+    document.getElementById("power").innerHTML=""
+    document.getElementById("container").innerHTML=cleanUp("("+dy+")"+"sinh("+y+")")
+}
+
+function tanhFXN(){
+    y=fxn.value
+    dy=derivative(fxn.value)
+    document.getElementById("operator").innerHTML="tanh["
+    document.getElementById("bracket").innerHTML="]]"
+    document.getElementById("power").innerHTML=""
+    document.getElementById("container").innerHTML=cleanUp("("+dy+")"+"sech^2("+y+")")
+}
+
+function cschFXN(){
+    y=fxn.value
+    dy=derivative(fxn.value)
+    document.getElementById("operator").innerHTML="csch["
+    document.getElementById("bracket").innerHTML="]]"
+    document.getElementById("power").innerHTML=""
+    document.getElementById("container").innerHTML=cleanUp("-("+dy+")csch("+y+")coth("+y+")")
+}
+
+function sechFXN(){
+    y=fxn.value
+    dy=derivative(fxn.value)
+    document.getElementById("operator").innerHTML="sech["
+    document.getElementById("bracket").innerHTML="]]"
+    document.getElementById("power").innerHTML=""
+    document.getElementById("container").innerHTML=cleanUp("-("+dy+")"+"sech("+y+")tanh("+y+")")
+}
+
+function cothFXN(){
+    y=fxn.value
+    dy=derivative(fxn.value)
+    document.getElementById("operator").innerHTML="coth["
+    document.getElementById("bracket").innerHTML="]]"
+    document.getElementById("power").innerHTML=""
+    document.getElementById("container").innerHTML=cleanUp("-("+dy+")csch^2("+y+")")
+}
+
 function expFXN(){
     y=fxn.value
     dy=derivative(fxn.value)
@@ -134,7 +227,9 @@ function lnFXN(){
     document.getElementById("operator").innerHTML="ln["
     document.getElementById("bracket").innerHTML="]]"
     document.getElementById("power").innerHTML=""
-    if(!isNaN(dy)&&dy!=0){
+    if(y==0){
+        document.getElementById("container").innerHTML="0"
+    }else if(!isNaN(dy)&&dy!=0){
         document.getElementById("container").innerHTML="1/x"
     }else{
         document.getElementById("container").innerHTML=cleanUp("("+dy+")/("+y+")")
@@ -151,7 +246,7 @@ function bFXN(){
     if(b==1){
         document.getElementById("container").innerHTML=0
     }else{
-        document.getElementById("container").innerHTML=cleanUp("("+dy+")("+b+"^("+y+"))(ln("+b+"))")
+        document.getElementById("container").innerHTML=cleanUp("("+dy+")("+b+"^("+y+"))ln("+b+")")
     }
 }
 
@@ -162,9 +257,11 @@ function logbFXN(){
     document.getElementById("operator").innerHTML="log_"+b+"["
     document.getElementById("bracket").innerHTML="]]"
     document.getElementById("power").innerHTML=""
-    if(b==1){
-        document.getElementById("container").innerHTML="☹️"
+    if(b==1||y==0){
+        document.getElementById("container").innerHTML="0"
+    }else if(!isNaN(dy)&&dy!=0){
+        document.getElementById("container").innerHTML="1/[xln("+b+")]"
     }else{
-        document.getElementById("container").innerHTML=cleanUp(`(${dy})/[(${y})(ln(${b})]`)
+        document.getElementById("container").innerHTML=cleanUp("("+dy+")/[("+y+")ln("+b+")]")
     }
 }
