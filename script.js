@@ -1,6 +1,5 @@
 let fxn=document.getElementById("fxn")
 let decArray=[]
-let decValue
 
 function derivative(input){
     if(input==0){
@@ -132,9 +131,8 @@ function powerRule(input){
     input[0]*=input[1]
     input[1]-=1
     decArray.push(decEval(input[0]),decEval(input[1]))
-    decValue=Math.max(...decArray)
-    input[0]=input[0].toFixed(decValue)
-    input[1]=input[1].toFixed(decValue)
+    input[0]=input[0].toFixed(Math.max(...decArray))
+    input[1]=input[1].toFixed(Math.max(...decArray))
     return input.join("x^")
 }
 
