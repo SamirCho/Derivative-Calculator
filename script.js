@@ -148,7 +148,6 @@ function cleanUp(input){
     }
     input=input.join("+")
     input=input.split("")
-    console.log(input)
     for (let j = 0; j < input.length; j+=0.5) {
         let i=Math.floor(j)
         if(input[i]=="-"&&input[i+1]=="("&&!isNaN(input[i+2])&&input[i+3]==")"&&input[i+4]=="/"){
@@ -224,6 +223,5 @@ function cleanUp(input){
             input[i]="-"
         }
     }
-    console.log(input)
     return input.join("")
 }
