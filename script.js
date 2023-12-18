@@ -189,7 +189,7 @@ function cleanUp(input){
         if(input[i]=="-"&&input[i-1]!="^"){
             input[i]=" - "
         }
-        if(input[i]=="x"&&input[i+1]=="^"&&input[i+2]=="0"){
+        if(input[i]=="x"&&input[i+1]=="^"&&input[i+2]=="0"&&input[i+3]!="."){
             input[i]="("
             input[i+1]="1"
             input[i+2]=")"
@@ -224,10 +224,10 @@ function cleanUp(input){
         if(input[i]=="-"&&input[i+1]=="/"){
             input[i]="-1"
         }
-        if(input[i]=="-"&&input[i+1]=="0"){
+        if(input[i]=="-"&&input[i+1]=="0"&&input[i+2]!="."){
             return 0
         }
-        if(input[i]=="-0"){
+        if(input[i]=="-0"&&input[i+2]!="."){
             return 0
         }
         if(input[i]=="("&&input[i+1]=="x"&&input[i+2]==")"&&input[i+3]=="^"&&!isNaN(input[i+4])){
