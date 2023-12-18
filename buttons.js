@@ -233,8 +233,8 @@ function lnFXN(){
     document.getElementById("power").innerHTML=""
     if(y==0){
         document.getElementById("container").innerHTML="0"
-    }else if(!isNaN(dy)&&dy!=0){
-        document.getElementById("container").innerHTML="1/x"
+    // }else if(!isNaN(dy)&&dy!=0){
+    //     document.getElementById("container").innerHTML="1/x"
     }else{
         document.getElementById("container").innerHTML=cleanUp("("+dy+")/("+y+")")
     }
