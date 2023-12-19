@@ -263,7 +263,7 @@ function logbFXN(){
     document.getElementById("power").innerHTML=""
     if(b==1||y==0){
         document.getElementById("container").innerHTML="0"
-    }else if(!isNaN(dy)&&dy!=0){
+    }else if(!isNaN(dy)&&dy!=0&&y.split("")[y.split("").length-1]=="x"){
         document.getElementById("container").innerHTML="1/[xln("+b+")]"
     }else{
         document.getElementById("container").innerHTML=cleanUp("("+dy+")/[("+y+")ln("+b+")]")
