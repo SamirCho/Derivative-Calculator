@@ -1,5 +1,6 @@
 let b=document.getElementById("base").value
 let n=document.getElementById("npower").value
+let coefValue=document.getElementById("coefficient").value
 let buttonNames=["no function","sqrt","cbrt","reciprocal","abs","^n","sin","cos","tan","csc","sec","cot","sinh","cosh","tanh","csch","sech","coth","exp","ln","b^","log_b"]
 let buttonArray=[]
 let y,dy
@@ -42,9 +43,19 @@ buttonArray[19].newButton.addEventListener("click",lnFXN)
 buttonArray[20].newButton.addEventListener("click",bFXN)
 buttonArray[21].newButton.addEventListener("click",logbFXN)
 
-function noFXN(){
+function update(){
     y=fxn.value
     dy=derivative(fxn.value)
+    coefValue=document.getElementById("coefficient").value
+    if(coefValue!=""){
+        document.getElementById("coefContainer").innerHTML=coefValue+"·"
+        document.getElementById("bracket1").innerHTML="["
+        document.getElementById("bracket2").innerHTML="]"
+    }
+}
+
+function noFXN(){
+    update()
     document.getElementById("operator").innerHTML=""
     document.getElementById("bracket").innerHTML="]"
     document.getElementById("power").innerHTML=""
@@ -52,8 +63,7 @@ function noFXN(){
 }
 
 function sqrtFXN(){
-    y=fxn.value
-    dy=derivative(fxn.value)
+    update()
     document.getElementById("operator").innerHTML="sqrt["
     document.getElementById("bracket").innerHTML="]]"
     document.getElementById("power").innerHTML=""
@@ -61,8 +71,7 @@ function sqrtFXN(){
 }
 
 function cbrtFXN(){
-    y=fxn.value
-    dy=derivative(fxn.value)
+    update()
     document.getElementById("operator").innerHTML="cbrt["
     document.getElementById("bracket").innerHTML="]]"
     document.getElementById("power").innerHTML=""
@@ -70,8 +79,7 @@ function cbrtFXN(){
 }
 
 function reciprocalFXN(){
-    y=fxn.value
-    dy=derivative(fxn.value)
+    update()
     document.getElementById("operator").innerHTML="["
     document.getElementById("bracket").innerHTML="]"
     document.getElementById("power").innerHTML="^(-1)]"
@@ -83,8 +91,7 @@ function reciprocalFXN(){
 }
 
 function absFXN(){
-    y=fxn.value
-    dy=derivative(fxn.value)
+    update()
     document.getElementById("operator").innerHTML="abs["
     document.getElementById("bracket").innerHTML="]]"
     document.getElementById("power").innerHTML=""
@@ -92,8 +99,7 @@ function absFXN(){
 }
 
 function nFXN(){
-    y=fxn.value
-    dy=derivative(fxn.value)
+    update()
     n=document.getElementById("npower").value
     document.getElementById("operator").innerHTML="["
     document.getElementById("bracket").innerHTML="]"
@@ -109,8 +115,7 @@ function nFXN(){
 }
 
 function sinFXN(){
-    y=fxn.value
-    dy=derivative(fxn.value)
+    update()
     document.getElementById("operator").innerHTML="sin["
     document.getElementById("bracket").innerHTML="]]"
     document.getElementById("power").innerHTML=""
@@ -118,8 +123,7 @@ function sinFXN(){
 }
 
 function cosFXN(){
-    y=fxn.value
-    dy=derivative(fxn.value)
+    update()
     document.getElementById("operator").innerHTML="cos["
     document.getElementById("bracket").innerHTML="]]"
     document.getElementById("power").innerHTML=""
@@ -127,8 +131,7 @@ function cosFXN(){
 }
 
 function tanFXN(){
-    y=fxn.value
-    dy=derivative(fxn.value)
+    update()
     document.getElementById("operator").innerHTML="tan["
     document.getElementById("bracket").innerHTML="]]"
     document.getElementById("power").innerHTML=""
@@ -136,8 +139,7 @@ function tanFXN(){
 }
 
 function cscFXN(){
-    y=fxn.value
-    dy=derivative(fxn.value)
+    update()
     document.getElementById("operator").innerHTML="csc["
     document.getElementById("bracket").innerHTML="]]"
     document.getElementById("power").innerHTML=""
@@ -145,8 +147,7 @@ function cscFXN(){
 }
 
 function secFXN(){
-    y=fxn.value
-    dy=derivative(fxn.value)
+    update()
     document.getElementById("operator").innerHTML="sec["
     document.getElementById("bracket").innerHTML="]]"
     document.getElementById("power").innerHTML=""
@@ -154,8 +155,7 @@ function secFXN(){
 }
 
 function cotFXN(){
-    y=fxn.value
-    dy=derivative(fxn.value)
+    update()
     document.getElementById("operator").innerHTML="cot["
     document.getElementById("bracket").innerHTML="]]"
     document.getElementById("power").innerHTML=""
@@ -163,8 +163,7 @@ function cotFXN(){
 }
 
 function sinhFXN(){
-    y=fxn.value
-    dy=derivative(fxn.value)
+    update()
     document.getElementById("operator").innerHTML="sinh["
     document.getElementById("bracket").innerHTML="]]"
     document.getElementById("power").innerHTML=""
@@ -172,8 +171,7 @@ function sinhFXN(){
 }
 
 function coshFXN(){
-    y=fxn.value
-    dy=derivative(fxn.value)
+    update()
     document.getElementById("operator").innerHTML="cosh["
     document.getElementById("bracket").innerHTML="]]"
     document.getElementById("power").innerHTML=""
@@ -181,8 +179,7 @@ function coshFXN(){
 }
 
 function tanhFXN(){
-    y=fxn.value
-    dy=derivative(fxn.value)
+    update()
     document.getElementById("operator").innerHTML="tanh["
     document.getElementById("bracket").innerHTML="]]"
     document.getElementById("power").innerHTML=""
@@ -190,8 +187,7 @@ function tanhFXN(){
 }
 
 function cschFXN(){
-    y=fxn.value
-    dy=derivative(fxn.value)
+    update()
     document.getElementById("operator").innerHTML="csch["
     document.getElementById("bracket").innerHTML="]]"
     document.getElementById("power").innerHTML=""
@@ -199,8 +195,7 @@ function cschFXN(){
 }
 
 function sechFXN(){
-    y=fxn.value
-    dy=derivative(fxn.value)
+    update()
     document.getElementById("operator").innerHTML="sech["
     document.getElementById("bracket").innerHTML="]]"
     document.getElementById("power").innerHTML=""
@@ -208,8 +203,7 @@ function sechFXN(){
 }
 
 function cothFXN(){
-    y=fxn.value
-    dy=derivative(fxn.value)
+    update()
     document.getElementById("operator").innerHTML="coth["
     document.getElementById("bracket").innerHTML="]]"
     document.getElementById("power").innerHTML=""
@@ -217,8 +211,7 @@ function cothFXN(){
 }
 
 function expFXN(){
-    y=fxn.value
-    dy=derivative(fxn.value)
+    update()
     document.getElementById("operator").innerHTML="exp["
     document.getElementById("bracket").innerHTML="]]"
     document.getElementById("power").innerHTML=""
@@ -226,8 +219,7 @@ function expFXN(){
 }
 
 function lnFXN(){
-    y=fxn.value
-    dy=derivative(fxn.value)
+    update()
     document.getElementById("operator").innerHTML="ln["
     document.getElementById("bracket").innerHTML="]]"
     document.getElementById("power").innerHTML=""
@@ -241,8 +233,7 @@ function lnFXN(){
 }
 
 function bFXN(){
-    y=fxn.value
-    dy=derivative(fxn.value)
+    update()
     b=document.getElementById("base").value
     document.getElementById("operator").innerHTML=b+"^["
     document.getElementById("bracket").innerHTML="]]"
@@ -255,8 +246,7 @@ function bFXN(){
 }
 
 function logbFXN(){
-    y=fxn.value
-    dy=derivative(fxn.value)
+    update()
     b=document.getElementById("base").value
     document.getElementById("operator").innerHTML="log_"+b+"["
     document.getElementById("bracket").innerHTML="]]"
@@ -264,7 +254,7 @@ function logbFXN(){
     if(b==1||y==0){
         document.getElementById("container").innerHTML="0"
     }else if(!isNaN(dy)&&dy!=0&&y.split("")[y.split("").length-1]=="x"){
-        document.getElementById("container").innerHTML="1/[xln("+b+")]"
+        document.getElementById("container").innerHTML=cleanUp("1/[xln("+b+")]")
     }else{
         document.getElementById("container").innerHTML=cleanUp("("+dy+")/[("+y+")ln("+b+")]")
     }

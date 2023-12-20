@@ -16,10 +16,10 @@
     <h2>Trigonometric functions are assumed to be in radians.</h2>
     <h2>Customize the base of logarithmic and exponential functions here: <input id="base" class="field" value="10"> They are set as 10 by default. The natural logarithm and exponential functions are also available.</h2>
     <h2>Customize the power you raise your function to in the "nth power" button here: <input id="npower" class="field" value="2"> Set as 2 by default.</h2>
-    <span>d/dx[</span><span id="operator"></span><input type="text" id="fxn" value="x"><span id="bracket">]</span><span id="power"></span>
+    <span>d/dx[<input type="text" id="coefficient">·<span id="operator"></span><input type="text" id="fxn" value="x"><span id="bracket">]</span><span id="power"></span>
     <br>
     <div id="buttonContainer"></div>
     <div>Result:</div>
-    <div id="container">1</div>
+    <span id="coefContainer"></span><span id="bracket1"></span><span id="container">1</span><span id="bracket2"></span>
 </body>
 </html>

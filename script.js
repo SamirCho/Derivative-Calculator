@@ -9,7 +9,6 @@ function derivative(input){
         input="1"
         return 0
     }
-    input=cleanUp(input)
     if(input=="x"||input=="x^1"){
         input=="x"
         return 1
@@ -28,7 +27,7 @@ function derivative(input){
         for (let i = 0; i < input.length; i++) {
             input[i]=evaluate(input[i])
         }
-        return cleanUp(input.join("+"))
+        return input.join("+")
     }
 }
 
@@ -63,7 +62,34 @@ function breakup(input){
     for (let i = 0; i < array.length; i++) {
         array[i]=coef(array[i])
     }
+    for (let i = 0; i < array.length; i++) {
+        array[i]=parseFractions(array[i])
+    }
+    console.log(array)
     return array
+}
+
+function parseFractions(input){
+    input=input.split("/")
+    if(input.length==1){
+        return input.toString()
+    }else{
+        input=input.join("/")
+        if(input.split("x").length==1){
+            return input
+        }else{
+            if(input.split("/")[1]=="x"){
+                input=input.split("/")
+                input[1]="x^1"
+                input=input.join("/")
+            }
+            input=input.split("/")
+            input=input.join("")
+            input=input.split("^")
+            input[1]*=-1
+            return input.join("^")
+        }
+    }
 }
 
 function deleteEmptyItems(input){
@@ -128,6 +154,7 @@ function powerRule(input){
     if(input[0]==""){
         input[0]=1
     }
+    input[0]=eval(input[0])
     input[0]*=input[1]
     input[1]-=1
     decArray.push(decEval(input[0]),decEval(input[1]))
@@ -243,5 +270,9 @@ function cleanUp(input){
         input[0]="-"
         input.splice(1,2)
     }
+    if(input[0]=="-"&&input[1]=="1"){
+        input.splice(1,1)
+    }
+    console.log(input)
     return input.join("")
 }
