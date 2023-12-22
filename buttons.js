@@ -46,7 +46,10 @@ buttonArray[21].newButton.addEventListener("click",logbFXN)
 function update(){
     y=fxn.value
     dy=derivative(fxn.value)
-    coefValue=document.getElementById("coefficient").value
+    coefValue=parseFloat(document.getElementById("coefficient").value)
+    if(isNaN(coefValue)){
+        coefValue=""
+    }
     if(coefValue!=""){
         document.getElementById("coefContainer").innerHTML=coefValue+"·"
         document.getElementById("bracket1").innerHTML="["
